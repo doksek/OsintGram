@@ -577,4 +577,16 @@
     <string name="QuickAttachNewestFirst">Новые фото слева</string>
     <string name="QuickAttachNewestFirstInfo">Если выключено, последние фото идут от старых к новым слева направо.</string>
     <string name="PhotoSent">Фото отправлено</string>
+    <!-- OsintGram -->
+    <string name="OsintMenuMessage">OSINT: сообщение</string>
+    <string name="OsintMenuChatIndicators">OSINT: индикаторы чата</string>
+    <string name="OsintMessageTitle">OSINT-отчёт</string>
+    <string name="OsintCopy">Копировать</string>
+    <string name="OsintCopied">Отчёт скопирован</string>
+    <string name="OsintSaveEvidence">Сохранить доказательство</string>
+    <string name="OsintSaved">Сохранено: %1$s (.json + .txt)</string>
+    <string name="OsintSaveError">Ошибка сохранения</string>
+    <string name="OsintNoIndicators">В %1$d загруженных сообщениях не найдено ссылок, упоминаний и кошельков</string>
+    <string name="OsintIndicatorsTitle">Индикаторы чата</string>
+    <string name="OsintIndicatorsResult">Проверено загруженных сообщений: %1$d\nУникальных индикаторов: %2$d\nФайл: %3$s\n\nПрокрутите чат вверх, чтобы подгрузить больше истории, и запустите снова — результат будет полнее.</string>
 </resources>

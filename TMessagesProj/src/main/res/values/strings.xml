@@ -11943,4 +11943,16 @@
     <string name="QuickAttachNewestFirst">Newest photos on the left</string>
     <string name="QuickAttachNewestFirstInfo">When off, recent photos are ordered from oldest to newest, left to right.</string>
     <string name="PhotoSent">Photo sent</string>
+    <!-- OsintGram -->
+    <string name="OsintMenuMessage">OSINT: message</string>
+    <string name="OsintMenuChatIndicators">OSINT: chat indicators</string>
+    <string name="OsintMessageTitle">OSINT report</string>
+    <string name="OsintCopy">Copy</string>
+    <string name="OsintCopied">Report copied</string>
+    <string name="OsintSaveEvidence">Save evidence</string>
+    <string name="OsintSaved">Saved: %1$s (.json + .txt)</string>
+    <string name="OsintSaveError">Save error</string>
+    <string name="OsintNoIndicators">No links, mentions or wallets found in %1$d loaded messages</string>
+    <string name="OsintIndicatorsTitle">Chat indicators</string>
+    <string name="OsintIndicatorsResult">Loaded messages scanned: %1$d\nUnique indicators: %2$d\nFile: %3$s\n\nScroll the chat up to load more history and run again for a fuller result.</string>
 </resources>

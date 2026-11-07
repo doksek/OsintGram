@@ -1,61 +1,52 @@
-# Fork Client — Unofficial Telegram Messenger for Android
-![image](https://raw.githubusercontent.com/Forkgram/TelegramAndroid/58938f6bbe4159b90c38d9b94c9a70d57bedf3e0/TMessagesProj/src/main/res/drawable-xxhdpi/ic_launcher.png)  
-Fork Client is a fork of the official Telegram for Android application.  
-[<img src="https://f-droid.org/badge/get-it-on.png"
-      alt="Get it on F-Droid"
-      height="80">](https://f-droid.org/app/org.forkgram.messenger)
+<p align="center"><img src="docs/logo.png" width="160" alt="OsintGram"></p>
 
-![Build Status](https://travis-ci.org//Forkgram/TelegramAndroid.svg?branch=dev)
-[![Github All Releases](https://img.shields.io/github/downloads/Forkgram/TelegramAndroid/total.svg)](https://github.com/Forkgram/TelegramAndroid/releases)
+# OsintGram
 
-## Features:
+Неофициальный Telegram-клиент для Android с инструментами OSINT — для журналистов, фактчекеров и тех, кто разбирает скам.
+Основан на [Forkgram](https://github.com/Forkgram/TelegramAndroid), который в свою очередь основан на [официальном Telegram для Android](https://github.com/DrKLO/Telegram).
 
-- `Delete for everyone` option enabled by default.
-- Removed pencil floating icon.
-- Original message date for forwarded messages.
-- Smaller header in the sidebar.
-- Option to disable in-app camera.
-- Option to keep unmuted unread chats right after pinned dialogs.
-- See the correct full number of subscribers in groups/channels.
-- Option to go to the first message of a chat.
-- Quick share button for every media in private chats.
-- Option to start recording video messages with the rear camera.
-- Unlimited unarchived pinned chats (turns their sync off).
-- Option to disable big emojis.
-- Forward messages without quoting the original sender.
-- Added a lot of self-destruct timer's options in secret chats.
-  - Added 2, 3, 4, 5, 10, 15, 20, 30, 40 minutes.
-  - Added 2, 3, 5, 8, 12, 16 hours.
-  - Added 2, 3, 7 and 32 days.
-- Tap on cloud GIF with pre-written text will send GIF with this text as caption.
-- Tap on sticker with pre-written text will send both.
-- Added upload date for profile photos.
-- Added ability to see the profile info from the dialogs list via context menu.
-- Added ability to see unread count when you want to mark as read multiple dialogs.
-- Option to directly open the archive on pulldown
-- PiP mode for YouTube's in-app player
-- Added an option to show colored dots to quickly see when a person was last online  
-  - Yellow dot: last seen 15 minutes ago or less  
-  - Orange dot: last seen 30 minutes ago or less  
-  - Red dot: last seen 60 minutes ago or less 
+> OsintGram не связан с Telegram FZ-LLC. Все данные обрабатываются локально на телефоне, приложение не отправляет ничего сторонним серверам — только серверам Telegram, как обычный клиент.
 
-### Privacy Features:
+## Функции OSINT
 
-- Hidden `Connecting to proxy...` string.
-- Accounts names hidden from the side drawer.
-- Menus to edit username/bio/name moved in the debug menu (two long tap on version section).
-- Option to hide avatar/title of a chat from the dialogs list.
-- Option to not send stickers information in photos.
-- Some features are taken from the [Telegram FOSS](https://github.com/Telegram-FOSS-Team/Telegram-FOSS).
+Долгое нажатие на любое сообщение → в меню появляются пункты:
 
-### Privacy:
+**OSINT: сообщение** — отчёт по сообщению:
+- ID сообщения, чата, публичная ссылка на сообщение (`t.me/...`);
+- точное время отправки и редактирования в UTC, просмотры, пересылки, подпись автора;
+- «паспорт» отправителя: ID, юзернеймы (включая неактивные), дата-центр по фото профиля, метки бот / verified / premium / **SCAM** / **FAKE**;
+- откуда переслано: исходный канал или пользователь, ID и ссылка на оригинальный пост, дата оригинала;
+- медиа: имя файла, MIME, размер, ID файла и дата-центр;
+- найденные в тексте индикаторы: ссылки (включая скрытые за текстом), @упоминания, e-mail, крипто-кошельки BTC / ETH (EVM) / TRON / TON;
+- SHA-256 текста сообщения.
 
-Forkgram adds no telemetry, no analytics, no crash-reporting, and no third-party network endpoints on top of upstream Telegram for Android. All traffic goes only to Telegram's official servers.
+Кнопки: **Копировать** и **Сохранить доказательство** — в `Загрузки/OsintGram/` сохраняются `.json` (машиночитаемый) и `.txt` (для людей) с отметкой времени фиксации и SHA-256 файла.
 
+**OSINT: индикаторы чата** — собирает ссылки, упоминания, e-mail и кошельки из загруженных сообщений чата в таблицу `.csv` (`Загрузки/OsintGram/`): тип, значение, сколько раз встречается, первое сообщение и ссылка на него. Прокрутите чат вверх, чтобы подгрузить больше истории.
 
+Чего OsintGram намеренно **не делает**: скрытое отслеживание онлайна конкретных людей, поиск по утёкшим базам, массовый сбор телефонов участников групп.
 
-## Downloads:
-You can download binaries from Releases or from my [Telegram channel Forkgram](https://t.me/forkgram).
+## Установка
 
-## Building instructions for Debian 13:
-[BUILDING.md](BUILDING.md)
+1. Откройте вкладку [Actions](../../actions), выберите последнюю успешную сборку **OsintGram APK**.
+2. Внизу в разделе **Artifacts** скачайте `OsintGram-apk`, распакуйте архив.
+3. Перенесите `OsintGram.apk` на телефон и установите (разрешите установку из неизвестных источников).
+
+OsintGram ставится рядом с обычным Telegram и не заменяет его.
+
+## Сборка своей версии
+
+Сборка идёт в GitHub Actions, компьютер не нужен.
+
+1. Сделайте форк репозитория.
+2. Получите `api_id` и `api_hash` на [my.telegram.org](https://my.telegram.org) → API development tools.
+3. В форке: **Settings → Secrets and variables → Actions** → добавьте секреты `APP_ID` и `APP_HASH`.
+4. **Actions → OsintGram APK → Run workflow**.
+
+Необязательно — свой ключ подписи (чтобы обновления ставились поверх): секреты `KEYSTORE_BASE64` (keystore в base64), `KEYSTORE_PASS`, `KEY_ALIAS`, `KEY_PASS`. Без них APK подписывается тестовым ключом.
+
+Код OSINT-функций: [`TMessagesProj/src/main/java/org/telegram/messenger/osint/OsintTools.java`](TMessagesProj/src/main/java/org/telegram/messenger/osint/OsintTools.java).
+
+## Лицензия
+
+GPL-2.0, как у Telegram для Android и Forkgram. Спасибо авторам [Forkgram](https://github.com/Forkgram/TelegramAndroid) и [Telegram](https://github.com/DrKLO/Telegram).

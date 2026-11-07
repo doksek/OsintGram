@@ -1288,6 +1288,8 @@ public class ChatActivity extends BaseFragment implements
     public final static int OPTION_WELCOME_REVERT = 116;
     public final static int OPTION_SEND_MONEY = 117;
     public final static int OPTION_VOICE_TIMECODES = 118;
+    public final static int OPTION_OSINT_MESSAGE = 900;
+    public final static int OPTION_OSINT_CHAT_INDICATORS = 901;
 
     private final static int[] allowedNotificationsDuringChatListAnimations = new int[]{
             NotificationCenter.messagesRead,
@@ -32246,6 +32248,15 @@ public class ChatActivity extends BaseFragment implements
                 fillMessageMenu(primaryMessage, icons, items, options);
             }
 
+            if (selectedObject != null && selectedObject.messageOwner != null && selectedObject.getId() > 0 && !suggestEdit) {
+                items.add(LocaleController.getString(R.string.OsintMenuMessage));
+                options.add(OPTION_OSINT_MESSAGE);
+                icons.add(R.drawable.msg_info);
+                items.add(LocaleController.getString(R.string.OsintMenuChatIndicators));
+                options.add(OPTION_OSINT_CHAT_INDICATORS);
+                icons.add(R.drawable.msg_search);
+            }
+
             if (selectedObject != null && selectedObject.isHiddenSensitive() && !selectedObject.isMediaSpoilersRevealed) {
                 for (int i = 0; i < options.size(); ++i) {
                     final int option = options.get(i);
@@ -35108,6 +35119,22 @@ public class ChatActivity extends BaseFragment implements
                 } else {
                     startEditingMessageObject(selectedObject, option == OPTION_SUGGESTION_EDIT_MESSAGE);
                 }
+                selectedObject = null;
+                selectedObjectGroup = null;
+                selectedObjectToEditCaption = null;
+                break;
+            }
+            case OPTION_OSINT_MESSAGE: {
+                if (selectedObject != null) {
+                    org.telegram.messenger.osint.OsintTools.showMessageReport(getParentActivity(), currentAccount, selectedObject);
+                }
+                selectedObject = null;
+                selectedObjectGroup = null;
+                selectedObjectToEditCaption = null;
+                break;
+            }
+            case OPTION_OSINT_CHAT_INDICATORS: {
+                org.telegram.messenger.osint.OsintTools.exportChatIndicators(getParentActivity(), currentAccount, dialog_id, new ArrayList<>(messages));
                 selectedObject = null;
                 selectedObjectGroup = null;
                 selectedObjectToEditCaption = null;
