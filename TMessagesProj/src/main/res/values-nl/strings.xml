@@ -265,8 +265,8 @@
     <string name="LinkReplacementInvalid">Ongeldige expressie</string>
     <string name="LinkReplacedOnPaste">Link vervangen</string>
 
-    <string name="AppName">Fork Client</string>
-    <string name="AppNameBeta">Fork Client</string>
+    <string name="AppName">OsintGram</string>
+    <string name="AppNameBeta">OsintGram</string>
     <string name="LanguageName">Nederlands</string>
     <string name="English">Engels</string>
     <string name="LanguageNameInEnglish">Dutch</string>

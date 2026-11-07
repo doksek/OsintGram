@@ -51,7 +51,7 @@ android {
     compileSdkVersion 36
     buildToolsVersion '36.0.0'
 
-    defaultConfig.applicationId = "org.forkclient.messenger"
+    defaultConfig.applicationId = "org.osintgram.messenger"
 
 
     lintOptions {
@@ -276,7 +276,7 @@ android {
             ndk {
                 abiFilters "arm64-v8a"
             }
-            applicationId "org.forkclient.messenger.test"
+            applicationId "org.osintgram.messenger.test"
             sourceSets.debug {
                 manifest.srcFile '../TMessagesProj/config/debug/AndroidManifest_SDK23.xml'
             }
