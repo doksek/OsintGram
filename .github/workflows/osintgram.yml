@@ -1,0 +1,96 @@
+name: OsintGram APK
+
+# Сборка запускается:
+#  - вручную: вкладка Actions -> OsintGram APK -> Run workflow;
+#  - автоматически при каждом изменении в ветке dev.
+on:
+  workflow_dispatch:
+  push:
+    branches: [dev]
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Check secrets
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_HASH: ${{ secrets.APP_HASH }}
+        run: |
+          if [ -z "$APP_ID" ] || [ -z "$APP_HASH" ]; then
+            echo "::error::Нет секретов APP_ID и APP_HASH. Добавьте их: Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
+
+      - name: Free up disk space
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be
+        with:
+          tool-cache: false
+          android: false
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: nttld/setup-ndk@v1.4.2
+        with:
+          ndk-version: r27c
+          link-to-sdk: true
+
+      - name: Install NDK for the JNI build
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;27.2.12479018"
+
+      - name: Write build settings
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_HASH: ${{ secrets.APP_HASH }}
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.KEY_PASS }}
+        run: |
+          vars=gradle.properties
+          {
+            echo ""
+            echo "org.gradle.workers.max=1"
+            echo "APP_ID=$APP_ID"
+            echo "APP_HASH=$APP_HASH"
+            echo "CHECK_UPDATES=0"
+          } >> "$vars"
+          # Свой ключ подписи (необязательно на первом этапе).
+          # Без него APK подписывается тестовым ключом из репозитория.
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 --decode > "$PWD/osintgram.keystore"
+            {
+              echo "RELEASE_KEYSTORE_FILE=$PWD/osintgram.keystore"
+              echo "RELEASE_STORE_PASSWORD=$KEYSTORE_PASS"
+              echo "RELEASE_KEY_ALIAS=$KEY_ALIAS"
+              echo "RELEASE_KEY_PASSWORD=$KEY_PASS"
+            } >> "$vars"
+            echo "Используется свой ключ подписи."
+          else
+            echo "Свой ключ не задан — используется тестовый."
+          fi
+
+      - name: Build
+        run: |
+          sudo apt update
+          sudo apt -y install ninja-build meson nasm gperf pkg-config unzip
+          rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
+          rustup toolchain install 1.96.1 -t aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+          ./gradlew :TMessagesProj_App:assembleAfatRelease
+          mkdir -p artifact
+          cp TMessagesProj_App/build/outputs/apk/afat/release/app.apk artifact/OsintGram.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: OsintGram-apk
+          path: artifact/OsintGram.apk
+          retention-days: 14
