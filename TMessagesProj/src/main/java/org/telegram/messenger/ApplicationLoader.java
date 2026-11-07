@@ -483,7 +483,7 @@ public class ApplicationLoader extends Application {
             final boolean unifiedPushActive = PushListenerController.isUnifiedPushActive();
             cancelLegacyKeepAliveAlarms(pendingIntentFlags);
             if (unifiedPushActive) {
-                Log.d("Fork Client", "UnifiedPush is active, skipping push service watchdog");
+                Log.d("OsintGram", "UnifiedPush is active, skipping push service watchdog");
                 stopPushService();
                 return;
             }
@@ -509,7 +509,7 @@ public class ApplicationLoader extends Application {
                 alarm.cancel(pendingIntent);
             }
             } catch (Throwable ignore) {
-                Log.d("Fork Client", "Failed to set intent");
+                Log.d("OsintGram", "Failed to set intent");
             }
         }
     }

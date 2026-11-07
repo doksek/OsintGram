@@ -71,7 +71,7 @@
     <string name="formatterDay12HSec">h:mm:ss a</string>
     <string name="CopyWithoutProtocol">Copy without protocol</string>
     <!--fork settings view-->
-    <string name="ForkSettingsTitle">Fork Client Settings</string>
+    <string name="ForkSettingsTitle">OsintGram Settings</string>
     <string name="ForkCheckUpdate">Check updates</string>
     <string name="InAppCamera">Enable In-App Camera</string>
     <string name="InAppCameraInfo">In Attachments</string>
@@ -167,17 +167,17 @@
     <string name="LinkReplacementInvalid">Invalid expression</string>
     <string name="LinkReplacedOnPaste">Link replaced</string>
     <string name="ForkSettingsLock">Settings Lock</string>
-    <string name="ForkSettingsLockInfo">Use a separate 4-digit code to open Fork Client Settings. The code guards this settings screen only: clearing the app data or installing another build removes it.</string>
-    <string name="ForkSettingsLockUnlockInfo">Enter the code to open Fork Client Settings.</string>
+    <string name="ForkSettingsLockInfo">Use a separate 4-digit code to open OsintGram Settings. The code guards this settings screen only: clearing the app data or installing another build removes it.</string>
+    <string name="ForkSettingsLockUnlockInfo">Enter the code to open OsintGram Settings.</string>
     <string name="ForkSettingsLockConfirmCurrentCodeInfo">Enter the current code to change or remove it.</string>
     <string name="ForkSettingsLockConfirmCodeInfo">Enter the code again to confirm.</string>
     <string name="ForkSettingsLockCodesDoNotMatch">Codes don\'t match. Enter a new code.</string>
     <string name="ForkSettingsLockSetCode">Set code</string>
     <string name="ForkSettingsLockChangeCode">Change code</string>
     <string name="ForkSettingsLockRemoveCode">Remove code</string>
-    <string name="ForkSettingsLockRemoveCodeConfirm">Fork Client Settings will open without a code.</string>
-    <string name="AppName">Fork Client</string>
-    <string name="AppNameBeta">Fork Client</string>
+    <string name="ForkSettingsLockRemoveCodeConfirm">OsintGram Settings will open without a code.</string>
+    <string name="AppName">OsintGram</string>
+    <string name="AppNameBeta">OsintGram</string>
     <string name="AppNameFdroid">Forkgram</string>
     <string name="GoToTags">GoTo chats: %1$s</string>
     <string name="GoToNotFound">No GoTo chat found for #%1$s (%2$s)</string>

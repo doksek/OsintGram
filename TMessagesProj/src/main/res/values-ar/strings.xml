@@ -265,8 +265,8 @@
     <string name="LinkReplacementInvalid">تعبير غير صالح</string>
     <string name="LinkReplacedOnPaste">تم استبدال الرابط</string>
 
-    <string name="AppName">Fork Client</string>
-    <string name="AppNameBeta">Fork Client</string>
+    <string name="AppName">OsintGram</string>
+    <string name="AppNameBeta">OsintGram</string>
     <string name="LanguageName">العربية</string>
     <string name="English">الإنجليزية</string>
     <string name="LanguageNameInEnglish">Arabic</string>
