@@ -8,6 +8,9 @@ on:
   push:
     branches: [dev]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build APK
@@ -94,3 +97,15 @@ jobs:
           name: OsintGram-apk
           path: artifact/OsintGram.apk
           retention-days: 14
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="build-${{ github.run_number }}"
+          gh release create "$tag" artifact/OsintGram.apk \
+            --repo "${{ github.repository }}" \
+            --target "${{ github.sha }}" \
+            --title "OsintGram, сборка ${{ github.run_number }}" \
+            --notes "Скачайте OsintGram.apk ниже и установите на Android. Приложение ставится рядом с обычным Telegram." \
+            --latest
